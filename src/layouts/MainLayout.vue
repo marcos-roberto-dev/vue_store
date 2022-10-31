@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh Lpr fff">
+    <q-header elevated class="bg-purple-10">
       <q-toolbar>
         <q-btn
           flat
@@ -11,18 +11,18 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title> {{ APP_CONSTANTS.APP_NAME }} </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-      </q-list>
-    </q-drawer>
-
+    <q-footer elevated class="bg-purple-10">
+      <q-toolbar>
+        <div class="text-center full-width">
+          {{ $t('powered') }} v{{ $q.version }}
+        </div>
+      </q-toolbar>
+    </q-footer>
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered> </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -30,6 +30,7 @@
 </template>
 
 <script lang="ts">
+import { APP_CONSTANTS } from 'src/constants/app.constants';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -41,6 +42,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
 
     return {
+      APP_CONSTANTS,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
