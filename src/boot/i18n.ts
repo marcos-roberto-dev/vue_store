@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import { createI18n } from 'vue-i18n';
+import { Quasar } from 'quasar';
 
 import messages from 'src/i18n';
 
@@ -20,10 +21,10 @@ declare module 'vue-i18n' {
   export interface DefineNumberFormat {}
 }
 /* eslint-enable @typescript-eslint/no-empty-interface */
-
+const getLocale = Quasar.lang.getLocale();
 export default boot(({ app }) => {
   const i18n = createI18n<{ message: MessageSchema }, MessageLanguages>({
-    locale: 'en-US',
+    locale: getLocale?.includes('en') ? 'en-US' : getLocale,
     legacy: false,
     messages,
   });
